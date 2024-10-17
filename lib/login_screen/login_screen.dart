@@ -23,8 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/Logo.png", width: 30, height: 30),
-            const SizedBox(width: 12),
+            Image.asset("assets/eMeet.png", width: 60, height: 60),
             Text("eMeet",
                 style: GoogleFonts.roboto(
                   textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),

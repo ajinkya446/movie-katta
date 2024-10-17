@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset("assets/eMeet.png", width: 161, height: 161),
+          Image.asset("assets/eMeet.png", width: 200, height: 161, fit: BoxFit.fill),
           const SizedBox(height: 12),
           Text(
             "eMeet",
