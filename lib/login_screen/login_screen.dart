@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:office_meet/login_screen/otp_screen.dart';
+import 'package:eMeet/login_screen/otp_screen.dart';
 import 'package:toastification/toastification.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,27 +12,27 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController loginController = TextEditingController();
-  String? _otp;
+  String? otp;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/eMeet.png", width: 60, height: 60),
-            Text("eMeet",
-                style: GoogleFonts.roboto(
-                  textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
-                )),
-          ],
+    return SafeArea(
+        child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/eMeet.png", width: 60, height: 60),
+              Text("eMeet",
+                  style: GoogleFonts.roboto(
+                    textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+                  )),
+            ],
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,47 +59,50 @@ class _LoginScreenState extends State<LoginScreen> {
                   )),
               const SizedBox(height: 12),
               Center(
-                child: GestureDetector(
-                  onTap: () {
-                    if (loginController.text.isEmpty) {
+                  child: GestureDetector(
+                onTap: () {
+                  if (loginController.text.isEmpty) {
+                    toastification.show(
+                      type: ToastificationType.error,
+                      style: ToastificationStyle.fillColored,
+                      context: context,
+                      title: const Text('Please enter email address'),
+                      showIcon: false,
+                      showProgressBar: false,
+                      autoCloseDuration: const Duration(seconds: 2),
+                    );
+                    setState(() {});
+                  } else {
+                    String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                    final RegExp regExp = RegExp(emailPattern);
+                    if (!regExp.hasMatch(loginController.text)) {
                       toastification.show(
                         type: ToastificationType.error,
                         style: ToastificationStyle.fillColored,
+                        showIcon: false,
+                        showProgressBar: false,
                         context: context,
-                        title: const Text('Please enter email address'),
-                        autoCloseDuration: const Duration(seconds: 5),
+                        title: const Text('Please enter valid email address'),
+                        autoCloseDuration: const Duration(seconds: 2),
                       );
                       setState(() {});
                     } else {
-                      String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                      final RegExp regExp = RegExp(emailPattern);
-                      if (!regExp.hasMatch(loginController.text)) {
-                        toastification.show(
-                          type: ToastificationType.error,
-                          style: ToastificationStyle.fillColored,
-                          context: context,
-                          title: const Text('Please enter valid email address'),
-                          autoCloseDuration: const Duration(seconds: 5),
-                        );
-                        setState(() {});
-                      } else {
-                        Navigator.push(context, MaterialPageRoute(builder: (ctx) => OTPScreen(email: loginController.text)));
-                      }
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => OTPScreen(email: loginController.text)));
                     }
-                  },
-                  child: Container(
-                    height: 55,
-                    alignment: Alignment.center,
-                    width: double.maxFinite,
-                    margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xffFCFCFC)),
-                    child: Text("Send login code",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 13),
-                        )),
-                  ),
+                  }
+                },
+                child: Container(
+                  height: 55,
+                  alignment: Alignment.center,
+                  width: double.maxFinite,
+                  margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xffFCFCFC)),
+                  child: Text("Send login code",
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 13),
+                      )),
                 ),
-              )
+              ))
             ],
           ),
         ),

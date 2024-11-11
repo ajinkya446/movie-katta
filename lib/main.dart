@@ -1,9 +1,13 @@
+import 'package:eMeet/splash_screen/App.dart';
 import 'package:flutter/material.dart';
-import 'package:office_meet/splash_screen/App.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
-void main() {
+SharedPreferences? prefs;
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 

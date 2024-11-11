@@ -3,7 +3,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';
 
-import '../home_screen.dart';
+import '../registration_screen/registration_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   final String email;
@@ -24,8 +24,7 @@ class _OTPScreenState extends State<OTPScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/Logo.png", width: 30, height: 30),
-            const SizedBox(width: 12),
+            Image.asset("assets/eMeet.png", width: 60, height: 60),
             Text("eMeet",
                 style: GoogleFonts.roboto(
                   textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
@@ -43,25 +42,21 @@ class _OTPScreenState extends State<OTPScreen> {
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 27),
                   )),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text("We sent a 4-digit link to ${widget.email}.\nPlease enter it below to continue.",
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(color: Color(0xffE5E5E5), fontWeight: FontWeight.w400, fontSize: 15),
                   )),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0, vertical: 12),
                 child: OtpTextField(
-                  fieldWidth: 60, mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  fieldWidth: 60,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   numberOfFields: 4,
-                  borderColor: Color(0xFF512DA8),
-                  //set to true to show as box or false to show as dash
+                  borderColor: const Color(0xFF512DA8),
                   showFieldAsBox: true,
-                  //runs when a code is typed in
-                  onCodeChanged: (String code) {
-                    //handle validation or checks here
-                  },
-                  //runs when every textfield is filled
+                  onCodeChanged: (String code) {},
                   onSubmit: (String verificationCode) {
                     if (verificationCode == "5555") {
                       toastification.show(
@@ -72,7 +67,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         autoCloseDuration: const Duration(seconds: 5),
                       );
                       setState(() {});
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => HomeScreen()), (Route<dynamic> route) => false);
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => const RegistrationScreen()));
                     } else {
                       toastification.show(
                         type: ToastificationType.error,

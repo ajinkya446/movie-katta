@@ -1,4 +1,4 @@
-# office_meet
+# eMeet
 
 A new Flutter project.
 

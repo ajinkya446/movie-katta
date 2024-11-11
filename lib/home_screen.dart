@@ -1,6 +1,6 @@
+import 'package:eMeet/chat_screen/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:office_meet/chat_screen/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -76,7 +76,12 @@ class _HomeScreenState extends State<HomeScreen> {
             color: const Color(0xff595959),
             elevation: 1,
             // on selected we show the dialog box
-            onSelected: (value) {},
+            onSelected: (value) {
+              if (value == 1) {
+              } else if (value == 2) {
+              } else if (value == 3) {
+              } else if (value == 4) {}
+            },
           )
           // IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert, color: Colors.white)),
         ],
@@ -113,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (ctx, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (ctxChat) => ChatScreen(userName: "Alice Dayo")));
+                Navigator.push(context, MaterialPageRoute(builder: (ctxChat) => const ChatScreen(userName: "Alice Dayo")));
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 12),
