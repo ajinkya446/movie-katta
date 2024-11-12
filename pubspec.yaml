@@ -19,6 +19,7 @@ dependencies:
   shared_preferences: any
   flutter_bloc: any
   equatable: any
+  firebase_analytics: any
 
 dev_dependencies:
   flutter_test:

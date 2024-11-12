@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "609744618197",
+    "project_id": "emeet-76303",
+    "storage_bucket": "emeet-76303.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609744618197:android:8bfe2428aa6c5d648a185c",
+        "android_client_info": {
+          "package_name": "com.example.eMeet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNCiZNTgheJPlQUNakasaLjYuwp9MTovs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

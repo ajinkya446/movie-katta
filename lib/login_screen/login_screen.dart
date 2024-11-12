@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:eMeet/login_screen/otp_screen.dart';
@@ -13,11 +14,23 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController loginController = TextEditingController();
   String? otp;
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    logAppOpenEvent();
+  }
+
+  // Log a custom "app_open" event
+  Future<void> logAppOpenEvent() async {
+    await _analytics.logEvent(name: 'app_open', parameters: null);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
+      child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true,
