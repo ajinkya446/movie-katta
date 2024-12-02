@@ -1,9 +1,10 @@
+import 'package:eMeet/config/arguments/arguments.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';
 
-import 'otp_screen.dart';
+import '../../../config/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                       setState(() {});
                     } else {
-                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => OTPScreen(email: loginController.text)));
+                      Navigator.pushNamed(context, Constants.otpScreen, arguments: OTPScreenArguments(emailAddress: loginController.text));
                     }
                   }
                 },

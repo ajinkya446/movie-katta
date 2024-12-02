@@ -5,8 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../business_logic/blocs/splash_bloc/splash_bloc.dart';
 import '../../../business_logic/blocs/splash_bloc/splash_event.dart';
 import '../../../business_logic/blocs/splash_bloc/splash_state.dart';
-import '../launch_screen/launch_screen.dart';
-import '../login_screen/login_screen.dart';
+import '../../../config/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,9 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
         body: BlocListener<SplashBloc, SplashState>(
           listener: (context, state) {
             if (state is LoggedInUser) {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+              Navigator.pushReplacementNamed(context, Constants.loginScreen);
             } else if (state is LaunchState) {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const LaunchScreen()));
+              Navigator.pushReplacementNamed(context, Constants.launchScreen);
             }
           },
           child: Center(
