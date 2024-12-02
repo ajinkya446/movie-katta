@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
-import 'package:eMeet/bloc/splash_event.dart';
-import 'package:eMeet/bloc/splash_state.dart';
+import 'package:eMeet/business_logic/blocs/splash_bloc/splash_event.dart';
+import 'package:eMeet/business_logic/blocs/splash_bloc/splash_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../main.dart';
+import '../../../presentation/main.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitial()) {

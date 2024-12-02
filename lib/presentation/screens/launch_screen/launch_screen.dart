@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:eMeet/login_screen/login_screen.dart';
+
+import '../login_screen/login_screen.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});

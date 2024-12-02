@@ -1,13 +1,12 @@
-import 'package:eMeet/bloc/splash_bloc.dart';
-import 'package:eMeet/bloc/splash_event.dart';
-import 'package:eMeet/bloc/splash_state.dart';
-import 'package:eMeet/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../business_logic/blocs/splash_bloc/splash_bloc.dart';
+import '../../../business_logic/blocs/splash_bloc/splash_event.dart';
+import '../../../business_logic/blocs/splash_bloc/splash_state.dart';
 import '../launch_screen/launch_screen.dart';
-import '../main.dart';
+import '../login_screen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
