@@ -1,12 +1,11 @@
+import 'package:eMeet/business_logic/blocs/splash_bloc/splash_bloc.dart';
+import 'package:eMeet/presentation/screens/splash_screen/app.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
-
-import '../counter.dart';
-import '../counter_cubit.dart';
 
 SharedPreferences? prefs;
 
@@ -22,8 +21,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>(
-      create: (ctx) => CounterCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SplashBloc>(create: (BuildContext context) => SplashBloc()),
+      ],
       child: ToastificationWrapper(
           child: MaterialApp(
         title: 'Flutter Demo',
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
         ],
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
-        home: const Counter(),
+        home: const SplashScreen(),
       )),
     );
   }
