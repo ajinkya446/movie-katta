@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
+import '../business_logic/blocs/login_bloc/login_bloc.dart';
+
 SharedPreferences? prefs;
 
 Future<void> main() async {
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SplashBloc>(create: (BuildContext context) => SplashBloc()),
+        BlocProvider<LoginBloc>(create: (BuildContext context) => LoginBloc()),
       ],
       child: ToastificationWrapper(
           child: MaterialApp(
