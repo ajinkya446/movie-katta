@@ -1,3 +1,4 @@
+import 'package:eMeet/business_logic/blocs/home_bloc/home_bloc.dart';
 import 'package:eMeet/business_logic/blocs/splash_bloc/splash_bloc.dart';
 import 'package:eMeet/config/routes/routes.dart';
 import 'package:eMeet/presentation/screens/splash_screen/app.dart';
@@ -7,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
-
-import '../business_logic/blocs/login_bloc/login_bloc.dart';
 
 SharedPreferences? prefs;
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SplashBloc>(create: (BuildContext context) => SplashBloc()),
-        BlocProvider<LoginBloc>(create: (BuildContext context) => LoginBloc()),
+        BlocProvider<HomeBloc>(create: (BuildContext context) => HomeBloc()),
       ],
       child: ToastificationWrapper(
           child: MaterialApp(
