@@ -20,6 +20,7 @@ dependencies:
   flutter_bloc: any
   equatable: any
   firebase_analytics: any
+  carousel_slider: any
 
 dev_dependencies:
   flutter_test:

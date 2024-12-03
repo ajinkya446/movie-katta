@@ -13,11 +13,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     emit(SplashLoading());
     await Future.delayed(const Duration(seconds: 3));
     bool? isSplashLoaded = prefs!.getBool('isSplashLoaded');
-    if (isSplashLoaded ?? false) {
-      emit(LoggedInUser());
-    } else {
-      await prefs!.setBool('isSplashLoaded', true);
-      emit(LaunchState());
-    }
+    // if (isSplashLoaded ?? false) {
+    //   emit(LoggedInUser());
+    // } else {
+    //   await prefs!.setBool('isSplashLoaded', true);
+    emit(LaunchState());
+    // }
   }
 }
