@@ -26,7 +26,7 @@ class _TrendingSliderState extends State<TrendingSlider> {
                   height: MediaQuery.of(context).size.height * 0.4,
                   color: Colors.yellow,
                   child: Image.network("https://image.tmdb.org/t/p/w500${widget.trendingMovies!.results![itemIndex].posterPath ?? ""}",
-                      width: 200, height: MediaQuery.of(context).size.height * 0.4, fit: BoxFit.fill),
+                      width: 200, height: MediaQuery.of(context).size.height * 0.4, fit: BoxFit.cover),
                 ));
           },
           options: CarouselOptions(

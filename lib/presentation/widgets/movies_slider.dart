@@ -17,7 +17,7 @@ class _MoviesSliderState extends State<MoviesSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: ListView.builder(
           itemCount: widget.upcomingMovies != null ? widget.upcomingMovies!.results!.length : widget.topRatedMovies!.results!.length,
           scrollDirection: Axis.horizontal,
@@ -30,12 +30,12 @@ class _MoviesSliderState extends State<MoviesSlider> {
                 child: Container(
                     color: Colors.yellow,
                     width: MediaQuery.of(context).size.width * 0.450,
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     child: Image.network(
                         "https://image.tmdb.org/t/p/w500${widget.upcomingMovies != null ? (widget.upcomingMovies!.results![index].posterPath ?? "") : (widget.topRatedMovies!.results![index].posterPath ?? "")}",
                         width: 200,
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        fit: BoxFit.fill)),
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        fit: BoxFit.cover)),
               ),
             );
           }),
