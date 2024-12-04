@@ -19,7 +19,6 @@ class _TrendingSliderState extends State<TrendingSlider> {
       child: CarouselSlider.builder(
           itemCount: widget.trendingMovies!.results!.length,
           itemBuilder: (ctx, itemIndex, pageViewIndex) {
-            print("https://image.tmdb.org/t/p/w500${widget.trendingMovies!.results![itemIndex].posterPath ?? ""}");
             return ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Container(

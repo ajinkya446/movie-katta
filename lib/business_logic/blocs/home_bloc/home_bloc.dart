@@ -11,7 +11,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitial());
+  HomeBloc() : super(HomeInitial(selectedIndex: 0));
 
   @override
   Stream<int> mapEventToState(HomeEvent event) async* {
@@ -23,23 +23,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future onLoadTrendingMovies() async {
-    emit(HomeLoading());
+    emit(HomeLoading(selectedIndex: state.selectedIndex));
     MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
     TrendingMovies? trendingMovies = await movieRepository.fetchTrendingMovies();
-    emit(TrendingMoviesLoaded(trendingMovies: trendingMovies));
+    emit(HomeLoaded(selectedIndex: state.selectedIndex, upcomingMovies: state.upcomingMovies, trendingMovies: trendingMovies, topRatedMovies: state.topRatedMovies));
   }
 
   Future onLoadUpComingMovies() async {
-    emit(HomeLoading());
+    emit(HomeLoading(selectedIndex: state.selectedIndex));
     MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
     UpcomingMovies? upcomingMovies = await movieRepository.fetchUpcomingMovies();
-    emit(UpcomingMoviesLoaded(upcomingMovies: upcomingMovies));
+    emit(HomeLoaded(selectedIndex: state.selectedIndex, upcomingMovies: upcomingMovies, trendingMovies: state.trendingMovies, topRatedMovies: state.topRatedMovies));
   }
 
   Future onLoadTopMovies() async {
-    emit(HomeLoading());
+    emit(HomeLoading(selectedIndex: state.selectedIndex));
     MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
     TopRatedMovies? topRatedMovies = await movieRepository.fetchTopMovies();
-    emit(TopMoviesLoaded(topRatedMovies: topRatedMovies));
+    emit(HomeLoaded(selectedIndex: state.selectedIndex, upcomingMovies: state.upcomingMovies, trendingMovies: state.trendingMovies, topRatedMovies: topRatedMovies));
+  }
+
+  void onButtonSelected(int value) {
+    state.selectedIndex = value;
+    emit(HomeLoaded(selectedIndex: state.selectedIndex, upcomingMovies: state.upcomingMovies, trendingMovies: state.trendingMovies, topRatedMovies: state.topRatedMovies));
   }
 }

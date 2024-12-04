@@ -4,42 +4,31 @@ class HomeState {
   final TrendingMovies? trendingMovies;
   final TopRatedMovies? topRatedMovies;
   final UpcomingMovies? upcomingMovies;
+  int selectedIndex;
 
-  HomeState({this.trendingMovies, this.topRatedMovies, this.upcomingMovies});
+  HomeState({this.trendingMovies, this.topRatedMovies, this.upcomingMovies, required this.selectedIndex});
 }
 
-class HomeInitial extends HomeState {}
+class HomeInitial extends HomeState {
+  HomeInitial({required super.selectedIndex});
+}
 
-class TrendingLoading extends HomeState {}
+class HomeLoading extends HomeState {
+  HomeLoading({required super.selectedIndex});
+}
 
-class TopRateLoading extends HomeState {}
-
-class HomeLoading extends HomeState {}
-
-class UpcomingLoading extends HomeState {}
-
-class TrendingMoviesLoaded extends HomeState {
+class HomeLoaded extends HomeState {
   final TrendingMovies? trendingMovies;
-
-  TrendingMoviesLoaded({this.trendingMovies});
-}
-
-class TopMoviesLoaded extends HomeState {
   final TopRatedMovies? topRatedMovies;
-
-  TopMoviesLoaded({this.topRatedMovies});
-}
-
-class UpcomingMoviesLoaded extends HomeState {
   final UpcomingMovies? upcomingMovies;
 
-  UpcomingMoviesLoaded({this.upcomingMovies});
+  HomeLoaded({this.trendingMovies, this.topRatedMovies, this.upcomingMovies, required super.selectedIndex});
 }
 
 class HomeError extends HomeState {
   final String message;
 
-  HomeError({required this.message});
+  HomeError({required this.message, required super.selectedIndex});
 
   @override
   List<Object> get props => [message];
