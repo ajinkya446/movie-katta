@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:eMeet/data/dataproviders/movie_data_provider.dart';
+import 'package:eMeet/data/models/top_rated_movies.dart';
+import 'package:eMeet/data/models/upcoming_movies.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../data/models/trending_movies.dart';
@@ -13,15 +15,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<int> mapEventToState(HomeEvent event) async* {
-    if (event is HomeInProgress) {
+    if (event is HomeLoading) {
       onLoadTrendingMovies();
+      onLoadTopMovies();
+      onLoadUpComingMovies();
     }
   }
 
-  Future<TrendingMovies?> onLoadTrendingMovies() async {
-    emit(HomeInProgress());
+  Future onLoadTrendingMovies() async {
+    emit(HomeLoading());
     MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
     TrendingMovies? trendingMovies = await movieRepository.fetchTrendingMovies();
-    emit(HomeMoviesLoaded(trendingMovies));
+    emit(TrendingMoviesLoaded(trendingMovies: trendingMovies));
+  }
+
+  Future onLoadUpComingMovies() async {
+    emit(HomeLoading());
+    MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
+    UpcomingMovies? upcomingMovies = await movieRepository.fetchUpcomingMovies();
+    emit(UpcomingMoviesLoaded(upcomingMovies: upcomingMovies));
+  }
+
+  Future onLoadTopMovies() async {
+    emit(HomeLoading());
+    MovieRepository movieRepository = MovieRepository(movieDataProvider: MovieDataProvider());
+    TopRatedMovies? topRatedMovies = await movieRepository.fetchTopMovies();
+    emit(TopMoviesLoaded(topRatedMovies: topRatedMovies));
   }
 }
