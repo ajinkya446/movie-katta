@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Navigator.pushReplacementNamed(context, Constants.homeScreen);
             }
           },
-          child: Center(child: Image.asset("assets/logo_new.png", width: 200, height: 161, fit: BoxFit.fill)),
+          child: Center(child: Image.asset("assets/logo.png", width: 200, height: 200, fit: BoxFit.fill)),
         ),
       ),
     );

@@ -1,12 +1,14 @@
 part of 'home_bloc.dart';
 
 class HomeState {
-  final TrendingMovies? trendingMovies;
-  final TopRatedMovies? topRatedMovies;
-  final UpcomingMovies? upcomingMovies;
+  TrendingMovies? trendingMovies;
+  TrendingMovies? discoverMovies;
+  TopRatedMovies? topRatedMovies;
+  UpcomingMovies? upcomingMovies;
+  GenreList? genreList;
   int selectedIndex;
 
-  HomeState({this.trendingMovies, this.topRatedMovies, this.upcomingMovies, required this.selectedIndex});
+  HomeState({this.trendingMovies, this.discoverMovies, this.topRatedMovies, this.upcomingMovies, this.genreList, required this.selectedIndex});
 }
 
 class HomeInitial extends HomeState {
@@ -18,11 +20,18 @@ class HomeLoading extends HomeState {
 }
 
 class HomeLoaded extends HomeState {
-  final TrendingMovies? trendingMovies;
-  final TopRatedMovies? topRatedMovies;
-  final UpcomingMovies? upcomingMovies;
+  @override
+  TrendingMovies? trendingMovies;
+  @override
+  TrendingMovies? discoverMovies;
+  @override
+  TopRatedMovies? topRatedMovies;
+  @override
+  UpcomingMovies? upcomingMovies;
+  @override
+  GenreList? genreList;
 
-  HomeLoaded({this.trendingMovies, this.topRatedMovies, this.upcomingMovies, required super.selectedIndex});
+  HomeLoaded({this.trendingMovies, this.discoverMovies, this.topRatedMovies, this.upcomingMovies, this.genreList, required super.selectedIndex});
 }
 
 class HomeError extends HomeState {

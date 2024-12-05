@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<HomeBloc>(context).onLoadTrendingMovies();
     BlocProvider.of<HomeBloc>(context).onLoadTopMovies();
     BlocProvider.of<HomeBloc>(context).onLoadUpComingMovies();
+    BlocProvider.of<HomeBloc>(context).fetchGenreList();
     super.initState();
   }
 
@@ -36,20 +37,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 : Scaffold(
                     appBar: AppBar(
                       backgroundColor: Colors.transparent,
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.movie, color: Colors.yellow),
-                          const SizedBox(width: 10),
-                          Text("फिल्मी कट्टा",
-                              style: GoogleFonts.roboto(
-                                textStyle: const TextStyle(color: Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 20),
-                              )),
-                        ],
-                      ),
+                      title: Image.asset("assets/home_logo.png", width: 200),
                       centerTitle: true,
+                      actions: [
+                        if (state.genreList?.genres?.isNotEmpty ?? false)
+                          PopupMenuButton<String>(
+                            icon: const Icon(Icons.filter_list_outlined, color: Colors.white),
+                            padding: const EdgeInsets.all(2),
+                            onSelected: (String value) {
+                              BlocProvider.of<HomeBloc>(context).fetchGenreList();
+                              BlocProvider.of<HomeBloc>(context).discoverMovies(value);
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return List.generate(
+                                  state.genreList!.genres!.length,
+                                  (index) => PopupMenuItem<String>(
+                                        value: (state.genreList!.genres![index].id ?? "0").toString(),
+                                        child: Text(
+                                          state.genreList!.genres![index].name ?? "",
+                                          style: GoogleFonts.roboto(
+                                            textStyle: const TextStyle(color: Color(0xffffffff), fontWeight: FontWeight.w400, fontSize: 14),
+                                          ),
+                                        ),
+                                      ));
+                            },
+                          )
+                      ],
                     ),
-                    body: state.selectedIndex == 0 ? MovieListScreen(state: state) : Container(),
+                    body: state.selectedIndex == 0
+                        ? state.discoverMovies?.results?.isNotEmpty ?? false
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                                child: GridView.builder(
+                                    itemCount: state.discoverMovies?.results?.length,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 8 / 12, crossAxisCount: 2, mainAxisSpacing: 8.0, crossAxisSpacing: 8.0),
+                                    itemBuilder: (ctx, index) {
+                                      return ClipRRect(
+                                          borderRadius: BorderRadius.circular(12),
+                                          child: Container(
+                                            color: Colors.yellow,
+                                            child: Image.network("https://image.tmdb.org/t/p/w500${(state.discoverMovies?.results?[index].posterPath ?? "")}",
+                                                width: 200, height: MediaQuery.of(context).size.height * 0.3, fit: BoxFit.cover),
+                                          ));
+                                    }),
+                              )
+                            : MovieListScreen(state: state)
+                        : Container(),
                     bottomNavigationBar: BottomNavigationBar(
                       onTap: (value) {
                         BlocProvider.of<HomeBloc>(context).onButtonSelected(value);
