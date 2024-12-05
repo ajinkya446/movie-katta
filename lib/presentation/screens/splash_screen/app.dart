@@ -21,9 +21,6 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Scaffold(
         body: BlocListener<SplashBloc, SplashState>(
           listener: (context, state) {
-            /*if (state is LoggedInUser) {
-              Navigator.pushReplacementNamed(context, Constants.loginScreen);
-            } else */
             if (state is LaunchState) {
               Navigator.pushReplacementNamed(context, Constants.homeScreen);
             }
