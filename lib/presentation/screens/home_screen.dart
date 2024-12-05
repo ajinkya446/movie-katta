@@ -37,17 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 : Scaffold(
                     appBar: AppBar(
                       backgroundColor: Colors.transparent,
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.movie, color: Colors.yellow),
-                          const SizedBox(width: 10),
-                          Text("फिल्मी कट्टा",
-                              style: GoogleFonts.roboto(
-                                textStyle: const TextStyle(color: Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 20),
-                              )),
-                        ],
-                      ),
+                      title: Image.asset("assets/home_logo.png", width: 200),
                       centerTitle: true,
                       actions: [
                         if (state.genreList?.genres?.isNotEmpty ?? false)
@@ -55,8 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: const Icon(Icons.filter_list_outlined, color: Colors.white),
                             padding: const EdgeInsets.all(2),
                             onSelected: (String value) {
-                              // Handle the selected menu item
-                              print("Selected: $value");
                               BlocProvider.of<HomeBloc>(context).fetchGenreList();
                               BlocProvider.of<HomeBloc>(context).discoverMovies(value);
                             },
