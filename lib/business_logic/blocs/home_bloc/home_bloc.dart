@@ -14,7 +14,6 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial(selectedIndex: 0));
 
-  @override
   Stream<int> mapEventToState(HomeEvent event) async* {
     if (event is HomeLoading) {
       fetchGenreList();
