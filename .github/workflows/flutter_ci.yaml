@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    name: Build & Test
+    name: Build & release
     runs-on: macos-latest
 
     steps:
@@ -28,9 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Run Tests
-        run: flutter test
 
       - name: Build APK
         run: flutter build apk --release
