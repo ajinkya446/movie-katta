@@ -37,3 +37,30 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Create ZIP package
+        run: |
+          mkdir release
+          cp build/app/outputs/flutter-apk/app-release.apk release/
+          zip -r release-package.zip release
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }} - ${{ github.run_number }}
+          tag_name: v${{ github.run_number }}
+          body: |
+            🎉 Automated release created for branch: `${{ github.ref_name }}`.
+            This release contains the built APK.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/app/outputs/flutter-apk/app-release.apk
+            release-package.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
