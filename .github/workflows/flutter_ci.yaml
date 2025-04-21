@@ -3,13 +3,9 @@ name: Flutter CI/CD
 on:
   push:
     branches:
-      - main
-      - master
       - development
   pull_request:
     branches:
-      - main
-      - master
       - development
 
 permissions:
