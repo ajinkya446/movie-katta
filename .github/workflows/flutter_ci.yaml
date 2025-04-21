@@ -79,7 +79,6 @@ jobs:
           VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //' | cut -d "+" -f1)
           echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Save version as an environment variable
 
-      # Create and push tag based on version
       - name: Create and push tag
         run: |
           git tag -f v${{ env.VERSION }}  # Force create tag
@@ -90,7 +89,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}         # <-- THIS is required!
+          tag_name: v${{ env.VERSION }}
           name: "Release v${{ env.VERSION }}"
           body: |
             🎉 Automated release created for version: `${{ env.VERSION }}`.
@@ -99,7 +98,6 @@ jobs:
           VERSION: ${{ env.VERSION }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      # Upload APK and ZIP to the release
       - name: Upload APK and ZIP to Release
         uses: softprops/action-gh-release@v2
         with:
