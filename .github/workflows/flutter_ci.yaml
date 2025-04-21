@@ -70,8 +70,8 @@ jobs:
 
       - name: Set up Git configuration
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "Ajinkya Aher"
+          git config --global user.email "ajinkya446@gmail.com"
 
       - name: Get version from pubspec.yaml
         id: get_version
@@ -106,4 +106,4 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             release-package.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
