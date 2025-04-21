@@ -90,13 +90,14 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}  # Use the created tag for the release
-          name: Release ${{ env.VERSION }}
+          tag_name: v${{ env.VERSION }}         # <-- THIS is required!
+          name: "Release v${{ env.VERSION }}"
           body: |
             🎉 Automated release created for version: `${{ env.VERSION }}`.
             This release contains the built APK and ZIP package.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ env.VERSION }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       # Upload APK and ZIP to the release
       - name: Upload APK and ZIP to Release
