@@ -82,8 +82,8 @@ jobs:
       # Create and push tag based on version
       - name: Create and push tag
         run: |
-          git tag v${{ env.VERSION }}  # Create the tag based on the version
-          git push origin v${{ env.VERSION }}  # Push the tag to the remote repository
+          git tag -f v${{ env.VERSION }}  # Force create tag
+          git push origin -f v${{ env.VERSION }}  # Force push tag to remote
 
       # Now, create the GitHub release for the tag
       - name: Create GitHub Release
