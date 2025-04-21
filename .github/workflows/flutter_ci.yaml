@@ -11,7 +11,8 @@ on:
       - main
       - master
       - development
-
+permissions:
+  contents: write  # Allow release creation & asset upload
 jobs:
   build:
     name: Build & release
