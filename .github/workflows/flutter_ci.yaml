@@ -98,6 +98,18 @@ jobs:
           VERSION: ${{ env.VERSION }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
+      - name: Download APK Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-apk
+          path: ./artifacts/  # Download to the ./artifacts directory
+
+      - name: Download ZIP Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-package
+          path: ./artifacts/  # Download to the ./artifacts directory
+
       - name: Upload APK and ZIP to Release
         uses: softprops/action-gh-release@v2
         with:
