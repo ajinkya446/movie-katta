@@ -11,8 +11,10 @@ on:
       - main
       - master
       - development
+
 permissions:
   contents: write  # Allow release creation & asset upload
+
 jobs:
   build:
     name: Build & release
@@ -45,19 +47,30 @@ jobs:
           cp build/app/outputs/flutter-apk/app-release.apk release/
           zip -r release-package.zip release
 
+      - name: Get version from pubspec.yaml
+        id: get_version
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //' | cut -d "+" -f1)
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Save version as an environment variable
+
+      - name: Create and push tag
+        run: |
+          git tag ${{ env.VERSION }}  # Use the version from pubspec.yaml as the tag
+          git push origin ${{ env.VERSION }}  # Push the tag to the repository
+
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.ref_name }} - ${{ github.run_number }}
-          tag_name: v${{ github.run_number }}
+          tag_name: ${{ env.VERSION }}  # Use the extracted version as the tag
+          name: Release ${{ env.VERSION }}
           body: |
-            🎉 Automated release created for branch: `${{ github.ref_name }}`.
-            This release contains the built APK.
+            🎉 Automated release created for version: `${{ env.VERSION }}`.
+            This release contains the built APK and ZIP package.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload APK to Release
+      - name: Upload APK and ZIP to Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
